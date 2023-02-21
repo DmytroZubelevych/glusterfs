@@ -139,7 +139,7 @@ actions:
         do
             echo "Volume create operation - attempt ${counter}" | tee -a /var/log/glusterfs/glusterd.log;
             gluster volume create ${globals.replicatedVolume} replica ${NUMBER_OF_BRICKS} transport tcp ${BRICKS_STRING} force | tee -a /var/log/glusterfs/glusterd.log; res=$?
-            [[ "$res" -eq 0 ]] && { echo "Volume create operation succeeded" | tee -a /var/log/glusterfs/glusterd.log; exit 0; } 
+            [[ "$res" -eq 0 ]] && { echo "Volume create operation succeeded" | tee -a /var/log/glusterfs/glusterd.log; break; } 
             [[ "$counter" -gt 3 ]] && { echo "Volume create operation failed" | tee -a /var/log/glusterfs/glusterd.log; exit 1; }
             sleep 1
             counter=$((counter+1))
